@@ -44,16 +44,6 @@ void init()
     logging::add_common_attributes();
 }
 
-/*void logTrace(const std::string& data, const std::string& hash) {
-
-    std::string id  = getId();
-
-    BOOST_LOG_TRIVIAL(trace) << " THREAD " << std::setw(3)
-    << "#" + id << ": [INPUT DATA - "
-    << std::setw(5) << data << ", HASH - " << hash << "]\n";
-
-}*/
-
 void logInfoClientsMessage(const std::string& data) {
 
     std::string id  = getId();
