@@ -54,16 +54,6 @@ void logInfoClientsMessage(const std::string& data) {
 
 }
 
-void logInfoServersMessage(const std::string& data) {
-
-    std::string id  = getId();
-
-    std::cout << std::endl;
-    BOOST_LOG_TRIVIAL(info) << "THREAD " << std::setw(3)
-    << "#" + id << ": [Server's Message - " << data << "]";
-
-}
-
 void logInfoServersAnswer(const std::string& data) {
 
     std::string id  = getId();

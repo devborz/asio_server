@@ -21,10 +21,6 @@ std::string getId();
 
 void init();
 
-//void logTrace(const std::string& data, const std::string& hash);
-
 void logInfoClientsMessage(const std::string& data);
-
-void logInfoServersMessage(const std::string& data);
 
 void logInfoServersAnswer(const std::string& data);
