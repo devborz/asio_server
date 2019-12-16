@@ -16,9 +16,9 @@ void Server::work() {
 }
 
 void Server::acceptClientsThread() {
+
     this->acceptor_.get()->listen();
     while (true) {
-
         std::shared_ptr<Client> client(new Client(0));
 
         this->acceptor_.get()->accept(client.get()->sock());
@@ -26,22 +26,21 @@ void Server::acceptClientsThread() {
         std::string username;
         this->loginClient(client.get()->sock(), username);
         client.get()->setUsername(username);
+        logInfoClientsMessage(username);
 
-        this->clients_.push_back(client);
         this->tellClient(client.get()->sock(), "login_ok");
+        this->clients_.push_back(client);
     }
 }
 
-
-void Server::handleClientsThread() {
+void Server::handleClientsThread() {;
     while (true) {
-        //std::this_thread::sleep_for(time::milliseconds{2000});
         for(std::shared_ptr<Client>& client: this->clients_) {
+            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
             if (!client.get()->isTimeOut() && !client.get()->hasConsole()) {
                 std::shared_ptr<std::thread> clientsThread(new std::thread(
                     &Server::workWithClient, this, std::ref(client))
                 );
-
                 client.get()->setHasConsole();
 
                 this->clientsThreads.push_back(clientsThread);
@@ -68,7 +67,6 @@ void checkConnect(std::shared_ptr<Client>& client, const std::string& command) {
 }
 
 void Server::workWithClient(std::shared_ptr<Client>& client) {
-
     while(!client.get()->isTimeOut()) {
         std::string command;
 
@@ -129,8 +127,10 @@ void Server::tellClient(ip::tcp::socket& socket, std::string message) {
 void Server::listenToClient(ip::tcp::socket& socket, std::string& msg) {
     char data[512];
 
+    this->service_.run();
     size_t read_bytes = socket.read_some(ba::buffer(data));
     for (unsigned int i = 0; i < read_bytes - 1; i++) {
         msg += data[i];
     }
+    this->service_.stop();
 }

@@ -33,12 +33,12 @@ void Client::work() {
 void Client::talkWithServer() {
     while (true) {
         std::string message;
+        std::string s_count;
         std::string tilda = "\n~ ";
         std::cout << tilda;
 
         this->tellServer();
 
-        std::string s_count;
         this->listenToServer(s_count);
         int count = std::stoi(s_count);
         if (count) {
