@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/devborz/lab_07_asio_server.svg?token=rrbTiACLSyD7Yjcuyygg&branch=master)](https://travis-ci.com/devborz/lab_07_asio_server)
+[![Build Status](https://travis-ci.com/devborz/asio_server.svg?token=rrbTiACLSyD7Yjcuyygg&branch=master)](https://travis-ci.com/devborz/asio_server)
 # Лабораторная работа №7
 
 ## Задание
